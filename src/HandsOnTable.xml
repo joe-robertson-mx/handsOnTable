@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="mendix.handsontable.HandsOnTable" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Hands On Table</name>
+    <description>Javascript datagrid with spreadsheet UI</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="Data">
+            <property key="dataMx" type="datasource" isList="true" required="true">
+                <caption>Data</caption>
+                <description>The Datasource for your grid</description>
+            </property>
+            <property key="col" type="object" isList="true">
+                <caption>Columns</caption>
+                <description>Specify each column of data including a heading</description>
+                <properties>
+                    <propertyGroup caption="Columns">
+                        <property key="colName" type="string">
+                            <caption>Name</caption>
+                            <description/>
+                        </property>
+                         <property key="colVal" type="attribute" dataSource="../dataMx">
+                            <caption>Value</caption>
+                            <description/>
+                            <attributeTypes>
+                                <attributeType name="String"/>
+                                <attributeType name="Decimal"/>
+                                <attributeType name="Integer"/>
+                            </attributeTypes>
+                        </property>
+                     </propertyGroup>
+                </properties>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Misc">
+            <property key="height" type="integer" defaultValue="500" required="true">
+                <caption>Height</caption>
+                <description>Height in px</description>
+            </property>
+            <property key="width" type="integer" defaultValue="500" required="true">
+                <caption>Width</caption>
+                <description>Width in px</description>
+            </property>
+            <property key="apiKey" type="string" defaultValue="non-commercial-and-evaluation" required="true">
+                <caption>API Key</caption>
+                <description>Api Key for Hands On Table</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
