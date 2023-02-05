@@ -2,6 +2,17 @@ import { ReactElement, createElement, useEffect, useState } from "react";
 import { HotTable } from "@handsontable/react";
 import { ColType } from "typings/HandsOnTableProps";
 import { ListValue, ValueStatus } from "mendix";
+import {
+    registerAllPlugins
+    } from 'handsontable/plugins';
+    import {
+        registerCellType,
+        NumericCellType,
+        TextCellType,
+        CheckboxCellType
+      } from 'handsontable/cellTypes'
+
+
 
 export interface HandsOnTableComponentProps {
     col: ColType[];
@@ -19,6 +30,11 @@ export function HandsOnTableComponent({
     height
 }: HandsOnTableComponentProps): ReactElement {
     const [dataS, setDataS] = useState<any>([]);
+
+    registerAllPlugins();
+    registerCellType(NumericCellType);
+    registerCellType(TextCellType);
+    registerCellType(CheckboxCellType);
 
     const buildSheetData = (): any[][] => {
         let nofOfRows: number;
@@ -48,8 +64,23 @@ export function HandsOnTableComponent({
     useEffect(() => {
         if (dataMx.status === ValueStatus.Available) {
             setDataS(buildSheetData());
+            
         }
     }, [dataMx]);
 
-    return <HotTable data={dataS} colHeaders rowHeaders mergeCells licenseKey={apiKey} width={width} height={height} />;
+    return (
+        <HotTable
+            data={dataS}
+            colHeaders
+            rowHeaders
+            mergeCells
+            licenseKey={apiKey}
+            width={width}
+            height={height}
+            contextMenu
+            multiColumnSorting
+            filters
+            manualRowMove
+        />
+    );
 }
